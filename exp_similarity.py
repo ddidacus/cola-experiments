@@ -2,10 +2,10 @@ import numpy as np
 import torch
 from torch.nn import CosineSimilarity
 
-from .networks import NonPGNet, PGNet
-from .utils import load_checkpoint, update_th
-from .hparams import get_hparams
-from .games import (
+from cola.networks import NonPGNet, PGNet
+from cola.utils import load_checkpoint, update_th
+from cola.hparams import get_hparams
+from cola.games import (
     ultimatum, tandem, matching_pennies, chicken_game,
     ipd, hamiltonian_game, balduzzi,
 )

@@ -4,7 +4,7 @@ import torch.nn as nn
 #  if game in ['Tandem', 'Balduzzi', 'Hamiltonian']:
 class PGNet(nn.Module):
     def __init__(self, hyper_params):
-        super(self).__init__()
+        super(PGNet, self).__init__()
         input_dim, output_dim = hyper_params["input_dim"], hyper_params["output_dim"]
         self.net = torch.nn.Sequential(torch.nn.Linear(input_dim, hyper_params['num_nodes']),
             torch.nn.ReLU(),
@@ -22,7 +22,7 @@ class PGNet(nn.Module):
 #  else
 class NonPGNet(nn.Module):
     def __init__(self, hyper_params):
-        super(self).__init__()
+        super(NonPGNet, self).__init__()
         input_dim, output_dim = hyper_params["input_dim"], hyper_params["output_dim"]
         self.net = torch.nn.Sequential(torch.nn.Linear(input_dim, hyper_params['num_nodes']),
             torch.nn.Tanh(),

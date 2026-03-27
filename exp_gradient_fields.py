@@ -4,11 +4,11 @@ import torch.nn.functional as F
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from .networks import NonPGNet, PGNet
-from .utils import get_gradient, load_checkpoint, update_th
-from .hparams import get_hparams
-from .cola import find_local_min_colav2
-from .games import (
+from cola.networks import NonPGNet, PGNet
+from cola.utils import get_gradient, load_checkpoint, update_th
+from cola.hparams import get_hparams
+from cola.cola import find_local_min_colav2
+from cola.games import (
     matching_pennies, matching_pennies_batch,
     ultimatum, tandem, chicken_game, ipd, hamiltonian_game, balduzzi,
 )

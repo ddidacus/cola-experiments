@@ -4,10 +4,10 @@ import torch.nn.functional as F
 import seaborn as sns
 from torch.nn import CosineSimilarity
 
-from .networks import NonPGNet, PGNet
-from .utils import get_gradient, init_th, load_checkpoint, update_th
-from .hparams import get_hparams
-from .games import (
+from cola.networks import NonPGNet, PGNet
+from cola.utils import get_gradient, init_th, load_checkpoint, update_th
+from cola.hparams import get_hparams
+from cola.games import (
     ultimatum, tandem, matching_pennies, matching_pennies_batch,
     chicken_game, chicken_game_batch, ipd, ipd_batched,
     hamiltonian_game, balduzzi,

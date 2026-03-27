@@ -9,11 +9,11 @@ import seaborn as sns
 from scipy import stats
 from torch.nn import CosineSimilarity
 
-from .networks import NonPGNet, PGNet
-from .utils import init_th, load_checkpoint, smooth, update_th
-from .hparams import get_hparams
-from .cola import cola_v2, nn_batched_pretrain_colav2
-from .games import (
+from cola.networks import NonPGNet, PGNet
+from cola.utils import init_th, load_checkpoint, smooth, update_th
+from cola.hparams import get_hparams
+from cola.cola import cola_v2, nn_batched_pretrain_colav2
+from cola.games import (
     ultimatum, tandem, matching_pennies, matching_pennies_batch,
     chicken_game, chicken_game_batch, ipd, ipd_batched,
     hamiltonian_game, balduzzi,
