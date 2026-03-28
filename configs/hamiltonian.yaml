@@ -1,0 +1,38 @@
+game: "Hamiltonian"
+
+gamma: 0.96
+num_epochs: 500
+alpha: 0.5
+beta: 0.5
+la_rates: [0.1, 0.5]
+smoothing: 0.99
+
+input_dim: 2
+std: 1.0
+batch_size: 8
+num_innerloop_short: 120000
+num_innerloop_long: 120000
+num_nodes: 8
+interval: 1
+lr_scheduler: 0.8
+lr: 0.1
+
+algorithms:
+  - name: COLA_long
+    beta: 0.5
+    enabled: true
+  - name: LOLA
+    beta: 0.5
+    enabled: true
+  - name: HOLA2
+    beta: 0.5
+    enabled: true
+  - name: HOLA4
+    beta: 0.5
+    enabled: true
+  - name: CGD
+    beta: 0.5
+    enabled: true
+  - name: SOS
+    beta: 0.5
+    enabled: true

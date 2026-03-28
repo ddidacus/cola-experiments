@@ -1,0 +1,38 @@
+game: "Chicken Game"
+
+gamma: 0.96
+num_epochs: 500
+alpha: 0.5
+beta: 0.5
+la_rates: [0.1, 0.5]
+smoothing: 0.99
+
+input_dim: 2
+std: 1.0
+batch_size: 64
+num_innerloop_short: 8000
+num_innerloop_long: 8000
+num_nodes: 16
+interval: 7
+lr_scheduler: 1.0
+lr: 0.001
+
+algorithms:
+  - name: COLA_long
+    beta: 0.5
+    enabled: true
+  - name: LOLA
+    beta: 0.5
+    enabled: true
+  - name: HOLA2
+    beta: 0.5
+    enabled: true
+  - name: HOLA4
+    beta: 0.5
+    enabled: true
+  - name: CGD
+    beta: 0.5
+    enabled: true
+  - name: SOS
+    beta: 0.5
+    enabled: true

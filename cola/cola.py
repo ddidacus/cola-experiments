@@ -1,6 +1,10 @@
 import torch
 import numpy as np
+from torch.nn import CosineSimilarity
+from tqdm import tqdm
 from .utils import get_gradient
+
+cos = CosineSimilarity(dim=1, eps=1e-15)
 
 def cola_v2(th, Ls, alpha, hyper_params, beta=0.1, k_net=None, h_net=None):
     th_update = [th[0].clone(), th[1].clone()]
@@ -36,7 +40,7 @@ def nn_batched_pretrain_colav2(Ls, interval, hyper_params={}, net1=None,
     total_losses_dot = []
     r1 = -interval
     r2 = interval
-    for m in range(num_innerloop):
+    for m in tqdm(range(num_innerloop), desc="Pretraining COLA"):
         # Discover Neighbourhood
         betas = torch.rand(hyper_params['batch_size'], 1, requires_grad=True)
         theta_0 = (r1 - r2) * torch.rand(hyper_params['batch_size'], hyper_params['output_dim'], requires_grad=True) + r2
@@ -77,7 +81,7 @@ def nn_batched_pretrain_colav2(Ls, interval, hyper_params={}, net1=None,
         total_loss.sum(1).mean().backward()
 
         if m % 1 == 0:
-            total_losses_out[m] = total_loss.mean().unsqueeze(-1)
+            total_losses_out[m] = total_loss.mean().detach().item()
  
         adam1.step()
         adam2.step()

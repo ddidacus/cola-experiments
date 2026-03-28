@@ -1,5 +1,7 @@
 import torch
 
+EPS = 1e-10
+
 def get_gradient(function, param):
     grad = torch.autograd.grad(function, param, create_graph=True, allow_unused=True)[0]
     return grad
@@ -54,7 +56,7 @@ def update_th(th, Ls, alpha, algo, a=0.5, b=0.1, gam=1, ep=0.1, lss_lam=0.1, ord
   if algo == 'la':
     terms = [sum([torch.dot(grad_L[j][i], grad_L[j][j].detach())
                 for j in range(n) if j != i]) for i in range(n)]
-    grads = [grad_L[i][i]-alpha*get_gradient(terms[i], th_update[i]) for i in range(n)]
+    grads = [grad_L[i][i]-beta*get_gradient(terms[i], th_update[i]) for i in range(n)]
   
   elif algo == 'lola':
 
@@ -108,7 +110,7 @@ def update_th(th, Ls, alpha, algo, a=0.5, b=0.1, gam=1, ep=0.1, lss_lam=0.1, ord
               for j in range(n) if j != i]), th_update[i]) for i in range(n)]
     dot = torch.dot(-beta*torch.cat(chi), torch.cat(xi_0))
 
-    p1 = 1 if dot >= 0 else min(1, -a*torch.norm(torch.cat(xi_0))**2/dot)
+    p1 = 1 if dot >= 0 else min(1, -a*torch.norm(torch.cat(xi_0))**2/(dot+EPS))
     xi = torch.cat([grad_L[i][i] for i in range(n)])
     xi_norm = torch.norm(xi)
 
@@ -120,7 +122,7 @@ def update_th(th, Ls, alpha, algo, a=0.5, b=0.1, gam=1, ep=0.1, lss_lam=0.1, ord
     dims = [len(th_update[i]) for i in range(n)]
     xi = torch.cat([grad_L[i][i] for i in range(n)])
     H_o = get_hessian(th_update, grad_L, diag=False)
-    grad = torch.matmul(torch.inverse(torch.eye(sum(dims))+alpha*H_o), xi)
+    grad = torch.matmul(torch.inverse(torch.eye(sum(dims))+beta*H_o), xi)
     grads = [grad[sum(dims[:i]):sum(dims[:i+1])] for i in range(n)]
 
   elif algo == 'nl': # Naive Learning

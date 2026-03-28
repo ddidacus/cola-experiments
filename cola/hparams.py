@@ -1,10 +1,12 @@
-
 def get_hparams(game):
-    GAMMA = 0.96 #@param {type:"number"}
-    NUM_RUNS =  10#@param {type:"number"}
-    NUM_EPOCHS =  500#@param {type:"number"}
-    ALPHA =  5.0#@param {type:"number"}
-    BETA =   5.0#@param {type:"number"}
+    GAMMA = 0.96 
+    NUM_RUNS =  10
+    NUM_EPOCHS =  500
+
+    # consistency-loss alpha term
+    ALPHA =  5.0
+    # look-ahead rate
+    BETA = 0.5
     SMOOTHING = 0.99
 
     if game == 'IPD':
@@ -24,8 +26,10 @@ def get_hparams(game):
         LR = 1e-1
     else:
         BATCH_SIZE =  64
-        NUM_INNERLOOP_SHORT =  80000
-        NUM_INNERLOOP_LONG =  80000
+        # NUM_INNERLOOP_SHORT =  80000
+        # NUM_INNERLOOP_LONG =  80000
+        NUM_INNERLOOP_SHORT =  8000
+        NUM_INNERLOOP_LONG =  8000
         NUM_NODES =  16
         interval = 7
         LR_SCHEDULER = 1.0
